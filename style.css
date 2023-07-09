@@ -2,7 +2,6 @@
 
 :root {
     --color-white: rgb(255, 255, 255);
-    --color-black: rgb(0, 0, 0);
     --color-purple: rgb(166, 121, 208);
 }
 
@@ -11,7 +10,6 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    scroll-behavior: smooth;
     caret-color: transparent;
 }
 
@@ -36,7 +34,7 @@ body {
 h1 {
     font-size: 35px;
     margin-bottom: 20px;
-    color: var(--color-black);
+    color: var(--color-white);
 }
 
 .input-container {
@@ -53,7 +51,6 @@ h1 {
     outline: none;
     border: 1px solid var(--color-white);
     border-radius: 20px 0 0 20px;
-    box-shadow: 10px 10px 30px var(--color-white);
     font-size: 16px;
     color: var(--color-white);
     height: 40px;
@@ -66,7 +63,6 @@ h1 {
 
 #add-task-button {
     background-color: var(--color-white);
-    box-shadow: 10px 10px 30px var(--color-white);
     border: none;
     border-radius: 0 20px 20px 0;
     color: var(--color-black);
@@ -81,6 +77,40 @@ h1 {
 
 #add-task-button:hover {
     background-color: #e7e7e7;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-list li {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.task-list li.completed {
+    text-decoration: line-through;
+    background: gray;
+    color: var(--color-black);
+    cursor: pointer;
+}
+
+.delete-button,
+.edit-button {
+    border: none;
+    background-color: transparent;
+    color: var(--color-black);
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    margin-left: 5px;
 }
 
 .filter-container {
@@ -111,42 +141,4 @@ h1 {
 .filter-item:hover {
     background-color: var(--color-white);
     color: var(--color-purple);
-}
-
-.task-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.task-list li {
-    background-color: var(--color-white);
-    color: var(--color-black);
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.task-list li.completed {
-    text-decoration: line-through;
-    background: gray;
-    color: var(--color-black);
-}
-
-.delete-button,
-.edit-button {
-  border: none;
-  background-color: transparent;
-  color: var(--color-black);
-  cursor: pointer;
-  font-size: 16px;
-  transition: color 0.2s ease;
-  outline: none;
-  margin-left: 5px;
-}
-
-.delete-button:hover,
-.edit-button:hover {
-  color: var(--color-white);
 }

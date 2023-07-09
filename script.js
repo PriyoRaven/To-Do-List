@@ -1,73 +1,124 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var inputField = document.getElementById('task-input');
-    var addButton = document.getElementById('add-task-button');
-    var filterButtons = document.querySelectorAll('.filter-item');
-    var taskList = document.querySelector('.task-list');
-  
-    addButton.addEventListener('click', function() {
-      var taskDescription = inputField.value;
-  
-      if (taskDescription.trim() !== '') {
-        var taskItem = document.createElement('li');
-        taskItem.textContent = taskDescription;
-  
-        var deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-        deleteButton.classList.add('delete-button');
-        taskItem.appendChild(deleteButton);
-  
-        var editButton = document.createElement('button');
-        editButton.innerHTML = '<i class="fas fa-edit"></i>';
-        editButton.classList.add('edit-button');
-        taskItem.appendChild(editButton);
-  
-        taskList.appendChild(taskItem);
-  
-        inputField.value = '';
-      }
-    });
-  
-    taskList.addEventListener('click', function(event) {
-      if (event.target.tagName === 'LI') {
-        event.target.classList.toggle('completed');
-      }
-  
-      if (event.target.classList.contains('delete-button')) {
-        var listItem = event.target.parentNode;
-        listItem.remove();
-      }
-  
-      if (event.target.classList.contains('edit-button')) {
-        var listItem = event.target.parentNode;
-        var taskText = listItem.firstChild.textContent;
-  
-        var updatedText = prompt('Edit the task:', taskText);
-        if (updatedText !== null && updatedText.trim() !== '') {
-          listItem.firstChild.textContent = updatedText;
-        }
-      }
-    });
-  
-    filterButtons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        filterButtons.forEach(function(btn) {
-          btn.classList.remove('active');
-        });
-  
-        this.classList.add('active');
-  
-        var filterValue = this.id.replace('filter-', '');
-  
-        taskList.querySelectorAll('li').forEach(function(item) {
-          item.style.display = 'block';
-  
-          if (filterValue === 'completed' && !item.classList.contains('completed')) {
-            item.style.display = 'none';
-          } else if (filterValue === 'pending' && item.classList.contains('completed')) {
-            item.style.display = 'none';
-          }
-        });
-      });
-    });
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Retrieve the necessary elements
+  const taskInput = document.getElementById("task-input");
+  const addTaskButton = document.getElementById("add-task-button");
+  const filterItems = document.querySelectorAll(".filter-item");
+  const filterAll = document.getElementById("filter-all");
+  const filterCompleted = document.getElementById("filter-completed");
+  const filterPending = document.getElementById("filter-pending");
+  const taskList = document.querySelector(".task-list");
+
+  // Event listener for adding a task
+  addTaskButton.addEventListener("click", addTask);
+
+  // Event listeners for filtering
+  filterAll.addEventListener("click", function () {
+    filterTasks("all");
   });
-  
+  filterCompleted.addEventListener("click", function () {
+    filterTasks("completed");
+  });
+  filterPending.addEventListener("click", function () {
+    filterTasks("pending");
+  });
+
+  // Function to add a new task
+  function addTask() {
+    const taskText = taskInput.value.trim();
+
+    if (taskText !== "") {
+      const newTask = createTaskElement(taskText);
+      taskList.appendChild(newTask);
+      taskInput.value = "";
+    }
+  }
+
+  // Function to create a new task element
+  function createTaskElement(taskText) {
+    const taskItem = document.createElement("li");
+    taskItem.classList.add("task-item");
+
+    const taskTextContainer = document.createElement("div");
+    taskTextContainer.classList.add("task-text");
+    taskTextContainer.innerText = taskText;
+
+    const actionButtons = document.createElement("div");
+    actionButtons.classList.add("action-buttons");
+
+    const editButton = document.createElement("i");
+    editButton.classList.add("fas", "fa-edit", "edit");
+    editButton.addEventListener("click", function () {
+      editTask(taskTextContainer);
+    });
+
+    const deleteButton = document.createElement("i");
+    deleteButton.classList.add("fas", "fa-trash-alt", "delete");
+    deleteButton.addEventListener("click", function () {
+      deleteTask(taskItem);
+    });
+
+    const doneButton = document.createElement("i");
+    doneButton.classList.add("fas", "fa-check-circle", "done");
+    doneButton.addEventListener("click", function () {
+      markAsDone(taskItem);
+    });
+
+    actionButtons.appendChild(editButton);
+    actionButtons.appendChild(deleteButton);
+    actionButtons.appendChild(doneButton);
+
+    taskItem.appendChild(taskTextContainer);
+    taskItem.appendChild(actionButtons);
+
+    return taskItem;
+  }
+
+  // Function to edit a task
+  function editTask(taskTextContainer) {
+    const newTaskText = prompt("Enter the new todo description:");
+    if (newTaskText !== null && newTaskText.trim() !== "") {
+      taskTextContainer.innerText = newTaskText.trim();
+    }
+  }
+
+  // Function to delete a task
+  function deleteTask(taskItem) {
+    taskItem.remove();
+  }
+
+  // Function to mark a task as done
+  function markAsDone(taskItem) {
+    taskItem.classList.toggle("completed");
+  }
+
+  // Function to filter tasks
+  function filterTasks(filter) {
+    const taskItems = document.querySelectorAll(".task-item");
+    filterItems.forEach(function (filterItem) {
+      filterItem.classList.remove("active");
+    });
+    document.getElementById(`filter-${filter}`).classList.add("active");
+
+    taskItems.forEach(function (taskItem) {
+      switch (filter) {
+        case "completed":
+          if (taskItem.classList.contains("completed")) {
+            taskItem.style.display = "block";
+          } else {
+            taskItem.style.display = "none";
+          }
+          break;
+        case "pending":
+          if (!taskItem.classList.contains("completed")) {
+            taskItem.style.display = "block";
+          } else {
+            taskItem.style.display = "none";
+          }
+          break;
+        default:
+          taskItem.style.display = "block";
+      }
+    });
+  }
+});
