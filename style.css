@@ -3,6 +3,8 @@
 :root {
     --color-white: rgb(255, 255, 255);
     --color-purple: rgb(166, 121, 208);
+    --color-black: rgb(0, 0, 0);
+    --secondary-color:  rgba(255, 255, 255, 0.393);
 }
 
 * {
@@ -11,6 +13,7 @@
     box-sizing: border-box;
     text-decoration: none;
     caret-color: transparent;
+    overflow-x: hidden;
 }
 
 body {
@@ -18,17 +21,36 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 3.5%;
-    background: var(--color-purple);
     font-family: 'Quicksand', sans-serif;
 }
 
+.bgwp{
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    transform: scale(1.03);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.2s all ease;
+}
+
 .container {
-    margin-top: 5px;
-    border: 2px solid var(--color-white);
-    border-radius: 20px;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
     text-align: center;
     width: 75%;
     padding: 20px;
+    overflow: hidden;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.437);
+    border-top: 2px solid var(--secondary-color);
+    border-left: 2px solid var(--secondary-color);
+    backdrop-filter: blur(10px);
 }
 
 h1 {
@@ -37,28 +59,48 @@ h1 {
     color: var(--color-white);
 }
 
+.heading {
+    text-align: center;
+    background: linear-gradient(to right, #ff7373 15%, #ffff7d 30%, #76ff79 45%, #70f5ff 60%, #676cff 75%, rgb(255, 110, 238) 90%, #ff7373 100%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-emphasis-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heading 20s linear infinite;
+  }
+  
+  @keyframes heading {
+    to {
+      background-position: 200% center;
+    }
+  }
+  
+
 .input-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    
 }
 
 #task-input {
-    background: transparent;
+    background: var(--secondary-color);
     width: 70%;
     padding: 15px;
     outline: none;
     border: 1px solid var(--color-white);
     border-radius: 20px 0 0 20px;
     font-size: 16px;
-    color: var(--color-white);
+    color: var(--color-black);
     height: 40px;
     caret-color: var(--color-white);
 }
 
 #task-input::placeholder {
-    color: var(--color-white);
+    color: var(--color-black);
 }
 
 #add-task-button {
@@ -91,14 +133,15 @@ h1 {
     margin-bottom: 10px;
     border-radius: 15px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.21), inset -5px -5px 10px 0 rgb(157, 157, 157);
 }
 
 .task-list li.completed {
     text-decoration: line-through;
     background: gray;
-    color: var(--color-black);
+    color: var(--secondary-color);
     cursor: pointer;
 }
 
@@ -117,6 +160,7 @@ h1 {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    
 }
 
 .filter-item {
@@ -140,5 +184,6 @@ h1 {
 .filter-item.active,
 .filter-item:hover {
     background-color: var(--color-white);
-    color: var(--color-purple);
+    color: var(--color-black);
+    box-shadow: inset 6px 6px 10px 0 #ffffff, inset -5px -5px 10px 0 #00000081;
 }

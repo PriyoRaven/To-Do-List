@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const filterPending = document.getElementById("filter-pending");
   const taskList = document.querySelector(".task-list");
 
+  // For the background
+  var randomNumber = Math.floor(Math.random() * 4) + 1; //1 to 4
+  var randomImage = "wallpaper" + randomNumber + ".jpg"
+  var randomImgSrc = "wallpaper/" + randomImage;
+  var image = document.getElementsByClassName("backwallpaper")[0];
+  image.setAttribute("src", randomImgSrc);
+
   // Event listener for adding a task
   addTaskButton.addEventListener("click", addTask);
 
