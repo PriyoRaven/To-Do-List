@@ -7,4 +7,4 @@ You can take the code if you like. Thank you.
 
 Here goes the image of ui I created.
 
-![alt text](https://github.com/[PriyoRaven]/[To-DO-List]/demo.png?raw=true)
+![Screenshot](demo.png)
