@@ -1,6 +1,7 @@
 # To-Do List
-Made a todo list
-This todo list is only the front-end and thus cannot keep the data if reloaded.
+Made a todo list.
+
+This to-do list is only the front-end and thus cannot keep the data if reloaded.
 Please give me suggestions so that I can make the changes and make it much better.
 
 You can take the code if you like. Thank you.
