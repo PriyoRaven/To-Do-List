@@ -59,8 +59,14 @@ body {
 
 h1 {
     font-size: 35px;
+}
+
+.headingbox {
+    display:inline-block;
+    transform: rotate(1deg);
     margin-bottom: 20px;
-    color: var(--color-white);
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .heading {
@@ -143,6 +149,8 @@ h1 {
 
 .task-list li {
     background-color: var(--color-white);
+    background-image: radial-gradient(rgb(202, 202, 202) 7.2%, transparent 0);
+    background-size: 40px 30px;
     color: var(--color-black);
     padding: 10px;
     margin-bottom: 10px;
